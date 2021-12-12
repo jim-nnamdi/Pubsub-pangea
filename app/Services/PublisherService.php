@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Resources\PublisherServiceResource;
+use App\Models\Publisher;
 use Illuminate\Http\Request;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
@@ -28,8 +30,10 @@ class PublisherService {
     $subscriptionMsg = new AMQPMessage($request->data);
     
     $channel->basic_publish($subscriptionMsg,'', $topic);
+
+    $returnSpecificResourceForPublisher = Publisher::where("topic", $topic)->first();
     
-    return '[x] sent subscription message to subscribers';
+    return new PublisherServiceResource($returnSpecificResourceForPublisher);
     
     $channel->close(); 
     

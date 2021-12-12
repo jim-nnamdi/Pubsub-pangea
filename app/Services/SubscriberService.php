@@ -2,10 +2,13 @@
 
 namespace App\Services; 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use Illuminate\Http\Request;
+use App\Models\Subscriber;
+use App\Http\Resources\SubscriberServiceResource;
 
 class SubscriberService {
 
-  public function subscribeToPublishedTopics($topic) {
+  public function subscribeToPublishedTopics(Request $request, $topic) {
 
     $connection = new AMQPStreamConnection(
       config('RabbitMQ.server'), 
@@ -29,5 +32,9 @@ class SubscriberService {
     while(count($channel->callbacks)){
       $channel->wait();
     }
+
+    $returnSpecificResourceForSubscriber = Subscriber::where("topic", $topic)->first();
+    
+    return new SubscriberServiceResource($returnSpecificResourceForSubscriber);
   }
 }
