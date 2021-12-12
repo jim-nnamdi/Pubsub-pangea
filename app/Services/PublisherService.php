@@ -8,7 +8,12 @@ class PublisherService {
   
   public function createTopicForPublishing($topic, $data){
 
-    $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+    $connection = new AMQPStreamConnection(
+      config('RabbitMQ.server'), 
+      config('RabbitMQ.server_port'), 
+      config('RabbitMQ.server_name'), 
+      config('RabbitMQ.server_pwd')
+    );
 
     $channel = $connection->channel(); 
     
