@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post("/publish/{topic}", [App\Http\Controllers\PublisherController::class, "createTopicForPublishing"]);

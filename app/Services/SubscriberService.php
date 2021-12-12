@@ -18,10 +18,10 @@ class SubscriberService {
 
     $channel->queue_declare($topic, false, false, false, false); 
 
-    echo '[x] Please wait for incoming messages, press CTRL + C to exit';
+    return '[x] Please wait for incoming messages, press CTRL + C to exit';
 
     $callback = function($msg){
-      echo '[x]'. $msg->body . 'received';
+      return '[x]'. $msg->body . 'received';
     };
 
     $channel->basic_consume($topic, '', false,true, false, false, $callback );
