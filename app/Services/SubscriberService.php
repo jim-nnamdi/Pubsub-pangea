@@ -21,8 +21,6 @@ class SubscriberService {
 
     $channel->queue_declare($topic, false, false, false, false); 
 
-    return '[x] Please wait for incoming messages, press CTRL + C to exit';
-
     $callback = function($msg){
       return '[x]'. $msg->body . 'received';
     };
