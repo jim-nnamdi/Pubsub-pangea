@@ -10,4 +10,8 @@ class Publisher extends Model
     use HasFactory;
 
     protected $fillable = ["topic", "data"];
+
+    protected $casts =  [
+        "data" => "array"
+    ]
 }
