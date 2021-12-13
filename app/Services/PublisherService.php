@@ -31,13 +31,15 @@ class PublisherService {
     
     $channel->basic_publish($subscriptionMsg,'', $topic);
 
-    $returnSpecificResourceForPublisher = Publisher::where("topic", $topic)->first();
-    
-    return new PublisherServiceResource($returnSpecificResourceForPublisher);
-    
+    $returnSpecificResourceForPublisher = Publisher::create([
+      "topic" => $topic,
+      "data"  => $request->data
+    ]); 
+
     $channel->close(); 
     
     $connection->close();
-
+    
+    return new PublisherServiceResource($returnSpecificResourceForPublisher);
   }
 }

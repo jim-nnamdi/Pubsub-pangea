@@ -33,7 +33,7 @@ class SubscriberService {
       $channel->wait();
     }
 
-    $returnSpecificResourceForSubscriber = Subscriber::where("topic", $topic)->first();
+  $returnSpecificResourceForSubscriber = Subscriber::where("topic", $topic)->first();
     
     return new SubscriberServiceResource($returnSpecificResourceForSubscriber);
   }
