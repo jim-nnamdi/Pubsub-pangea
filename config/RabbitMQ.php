@@ -1,5 +1,7 @@
 <?php 
 
+// RabbitMQ underlying ports and user/Pwd details
+
 return [
   "server"      => "localhost",
   "server_port" => 5672,
