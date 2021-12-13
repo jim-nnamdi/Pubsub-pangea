@@ -17,5 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post("/publish/{topic}", [App\Http\Controllers\PublisherController::class, "createTopicForPublishing"]);
-Route::post("/subscribe/{topic}", [App\Http\Controllers\SubscriberController::class, "subscribeToPublishedTopics"]);
+Route::post("/publish/{topic}", 
+[App\Http\Controllers\PublisherController::class, "createTopicForPublishing"]);
+
+Route::post("/subscribe/{topic}", 
+[App\Http\Controllers\SubscriberController::class, "subscribeToPublishedTopics"]);
